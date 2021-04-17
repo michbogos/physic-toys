@@ -46,14 +46,14 @@ while True:
     spring_force = -1 * abs(diff) * k
     mass_force += spring_force
 
-    mass_acc = mass / mass_force
+    mass_acc = mass_force / mass
     mass_vel += mass_acc / dt
     pos[1] += mass_vel / dt
     spring_length = pos[1]
 
     screen_pos = [pos[0] * 10, pos[1] * 10]
 
-    print(mass_vel)
+    print(mass_acc)
 
     mass_force = 0
     
