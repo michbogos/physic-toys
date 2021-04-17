@@ -1,9 +1,13 @@
 import pygame, sys
 from pygame.locals import *
 
+pygame.init()
+
 clock = pygame.time.Clock()
 
 WIDTH, HEIGHT = (500 ,500)
+
+font = pygame.font.SysFont(None, 18)
 
 mass = 1
 
@@ -30,6 +34,11 @@ display = pygame.display.set_mode((WIDTH, HEIGHT))
 
 def draw(line_start, line_end, rect_pos, width, height):
     display.fill((255, 255, 255))
+    
+    display.blit(label_acc, (10, 20))
+    display.blit(label_vel, (10, 38))
+    display.blit(label_pos, (10, 56))
+
     pygame.draw.line(display, (0, 0, 0),(line_start[0], line_start[1]), (line_end[0], line_end[1]))
     pygame.draw.rect(display, (0, 0, 0), (rect_pos[0], rect_pos[1], width, height))
 
@@ -50,6 +59,11 @@ while True:
     mass_vel += mass_acc / dt
     pos[1] += mass_vel / dt
     spring_length = pos[1]
+
+    
+    label_acc = font.render('Weight Acceleration:' + str(mass_acc)[0:4], True, (0, 0, 0))
+    label_vel = font.render('Weight Velocity:' + str(mass_vel)[0:4], True, (0, 0, 0))
+    label_pos = font.render('Weight Position:' + str(pos[1])[0:4], True, (0, 0, 0))
 
     screen_pos = [pos[0] * 10, pos[1] * 10]
 
